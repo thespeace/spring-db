@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 import thespeace.springdb.domain.Item;
 import thespeace.springdb.repository.ItemRepository;
@@ -30,6 +31,7 @@ import java.util.Optional;
  *
  */
 @Slf4j
+@Repository
 public class JdbcTemplateItemRepositoryV2 implements ItemRepository {
 
     private final NamedParameterJdbcTemplate template;

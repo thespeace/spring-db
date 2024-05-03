@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
 import thespeace.springdb.config.JdbcTemplateV1Config;
 import thespeace.springdb.config.JdbcTemplateV2Config;
+import thespeace.springdb.config.JdbcTemplateV3Config;
 import thespeace.springdb.config.MemoryConfig;
 import thespeace.springdb.repository.ItemRepository;
 
@@ -22,7 +23,8 @@ import thespeace.springdb.repository.ItemRepository;
  */
 //@Import(MemoryConfig.class)
 //@Import(JdbcTemplateV1Config.class)
-@Import(JdbcTemplateV2Config.class)
+//@Import(JdbcTemplateV2Config.class)
+@Import(JdbcTemplateV3Config.class)
 @SpringBootApplication(scanBasePackages = "thespeace.springdb.web")
 public class SpringDbApplication {
 

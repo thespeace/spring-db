@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 import thespeace.springdb.domain.Item;
 import thespeace.springdb.repository.ItemRepository;
@@ -22,6 +23,7 @@ import java.util.Optional;
  * <h1>JdbcTemplate</h1>
  */
 @Slf4j
+@Repository
 public class JdbcTemplateItemRepositoryV1 implements ItemRepository {
 
     //dataSource 를 의존 관계 주입 받고 생성자 내부에서 JdbcTemplate 을 생성(관례상 이 방법을 많이 사용, 물론 스프링 빈으로 등록하고 주입받아도 된다.)
