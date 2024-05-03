@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
+import thespeace.springdb.config.JdbcTemplateV1Config;
 import thespeace.springdb.config.MemoryConfig;
 import thespeace.springdb.repository.ItemRepository;
 
@@ -18,7 +19,8 @@ import thespeace.springdb.repository.ItemRepository;
  *     	   초기 데이터를 만들어서 저장하는 빈이다.</li>
  * </ul>
  */
-@Import(MemoryConfig.class)
+//@Import(MemoryConfig.class)
+@Import(JdbcTemplateV1Config.class)
 @SpringBootApplication(scanBasePackages = "thespeace.springdb.web")
 public class SpringDbApplication {
 

@@ -139,7 +139,7 @@ public class JdbcTemplateItemRepositoryV1 implements ItemRepository {
         }
 
         log.info("sql={}", sql);
-        return template.query(sql, itemRowMapper());
+        return template.query(sql, itemRowMapper(), param.toArray());
     }
 
     /**
