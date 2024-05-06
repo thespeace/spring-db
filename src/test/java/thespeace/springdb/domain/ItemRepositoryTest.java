@@ -1,9 +1,7 @@
 package thespeace.springdb.domain;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
+import org.springframework.test.annotation.Commit;
+import org.springframework.transaction.annotation.Transactional;
 import thespeace.springdb.repository.ItemRepository;
 import thespeace.springdb.repository.ItemSearchCond;
 import thespeace.springdb.repository.ItemUpdateDto;
@@ -39,6 +37,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * 테스트는 각각의 테스트 실행 전 후로 동작하는 {@code @BeforeEach}, {@code @AfterEach}라는 편리한 기능을 제공한다.
  *
  */
+@Transactional
 @SpringBootTest // @SpringBootApplication를 찾아서 설정으로 사용한다.
 class ItemRepositoryTest {
 
@@ -46,20 +45,25 @@ class ItemRepositoryTest {
     ItemRepository itemRepository;
 
     //트랜잭션 관리자는 PlatformTransactionManager를 주입 받아서 사용.
+/*
     @Autowired
     PlatformTransactionManager transactionManager;
     TransactionStatus status; //Rollback시 필요.
+*/
+
 
     /**
      * <h2>@BeforeEach</h2>
      * 각각의 테스트 케이스를 실행하기 직전에 호출된다.
      * 따라서 여기서 트랜잭션을 시작하면 된다. 그러면 각각의 테스트를 트랜잭션 범위 안에서 실행할 수 있다
      */
+/*
     @BeforeEach
     void beforeEach() {
         //트랜잭션 시작
         status = transactionManager.getTransaction(new DefaultTransactionDefinition());
     }
+*/
 
     /**
      * <h2>@AfterEach</h2>
@@ -74,7 +78,7 @@ class ItemRepositoryTest {
         }
 
         //트랜잭션 롤백
-        transactionManager.rollback(status);
+//        transactionManager.rollback(status);
     }
 
     @Test
