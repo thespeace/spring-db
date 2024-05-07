@@ -1,5 +1,5 @@
-# 기본 SQL 스크립트를 사용해서 메모리 DB를 초기화.
-# `src/test/resources/schema.sql` 경로와 파일 이름 모두 일치해야 한다.
+-- 기본 SQL 스크립트를 사용해서 메모리 DB를 초기화.
+-- `src/test/resources/schema.sql` 경로와 파일 이름 모두 일치해야 한다.
 drop table if exists item CASCADE;
 create table item
 (

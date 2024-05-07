@@ -51,6 +51,7 @@ public class SpringDbApplication {
 	 * 물론 애플리케이션이 종료되면 임베디드 모드로 동작하는 H2 데이터베이스도 함께 종료되고, 데이터도 모두 사라진다.
 	 * 쉽게 이야기해서 애플리케이션에서 자바 메모리를 함께 사용하는 라이브러리처럼 동작하는 것이다.
 	 */
+/*
 	@Bean
 	@Profile("test") //프로필이 test 인 경우에만 데이터소스를 스프링 빈으로 등록.
 	public DataSource dataSource() {
@@ -62,5 +63,6 @@ public class SpringDbApplication {
 		dataSource.setPassword("");
 		return dataSource;
 	}
+*/
 
 }
