@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="thespeace.springdb.repository.mybatis.ItemMapper"><!--namespace : 앞서 만든 매퍼 인터페이스를 지정하면 된다.-->
+
+<!--
+    #{} 문법을 사용하면 PreparedStatement 를 사용한다. JDBC의 ? 를 치환한다 생각하면 된다.
+    useGeneratedKeys 는 데이터베이스가 키를 생성해 주는 IDENTITY 전략일 때 사용한다.
+    keyProperty는 생성되는 키의 속성 이름을 지정한다. Insert가 끝나면 item 객체의 id 속성에 생성된 값이 입력된다.
+-->
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into item (item_name, price, quantity)
+            values (#{itemName}, #{price}, #{quantity})
+    </insert>
+
+<!--
+    파라미터가 1개만 있으면 @Param 을 지정하지 않아도 되지만, 파라미터가 2개 이상이면 @Param 으로 이름을 지정해서 파라미터를 구분해야 한다.
+-->
+    <update id="update">
+        update item
+        set item_name = #{updateParam.itemName},
+            price = #{updateParam.price},
+            quantity = #{updateParam.quantity}
+        where id = #{id}
+    </update>
+
+<!--
+    resultType 은 반환 타입을 명시하면 된다. 여기서는 결과를 Item 객체에 매핑한다.
+        1. 앞서 application.properties 에 mybatis.type-aliasespackage 속성을 지정한 덕분에 모든 패키지 명을 다 적지는 않아도된다.
+           그렇지 않으면 모든 패키지 명을 다 적어야 한다.
+        2. JdbcTemplate의 BeanPropertyRowMapper 처럼 SELECT SQL의 결과를 편리하게 객체로 바로 변환해준다.
+        3. mybatis.configuration.map-underscore-to-camel-case=true 속성을 지정한 덕분에 언더스코어를 카멜 표기법으로 자동으로 처리해준다. ( item_name -> itemName )
+-->
+    <select id="findById" resultType="Item">
+        select id, item_name, price, quantity
+        from item
+        where id = #{id}
+    </select>
+
+<!--
+    반환 객체가 하나이면 Item , Optional<Item> 과 같이 사용하면 되고, 반환 객체가 하나 이상이면 컬렉션을 사용하면 된다. 주로 List 를 사용한다.
+        1. Mybatis는 <where> , <if> 같은 동적 쿼리 문법을 통해 편리한 동적 쿼리를 지원한다.
+        2. <where> 은 적절하게 where 문장을 만들어준다. <if> 가 모두 실패하게 되면 SQL where 를 만들지 않고, 하나라도 성공하면 처음 나타나는 and 를 where 로 변환해준다.
+
+    XML에서는 데이터 영역에 <, >, & 와 같은 특수 문자를 사용할 수 없기 때문에 치환을 하거나 CDATA 구문 문법을 사용해야 한다.
+        1. `<` -> &lt;    `>` -> &gt;    `&` -> &amp;
+        2. <![CDATA[        and price <= #{maxPrice}        ]]>
+-->
+    <select id="findAll" resultType="Item">
+        select id, item_name, price, quantity
+        from item
+        <where>
+            <if test="itemName != null and itemName != ''">
+                and item_name like concat('%', #{itemName}, '%')
+            </if>
+            <if test="maxPrice != null">
+                and price $lt;= #{maxprice}
+            </if>
+        </where>
+    </select>
+
+</mapper>
