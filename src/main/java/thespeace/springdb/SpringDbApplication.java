@@ -7,10 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import thespeace.springdb.config.JdbcTemplateV1Config;
-import thespeace.springdb.config.JdbcTemplateV2Config;
-import thespeace.springdb.config.JdbcTemplateV3Config;
-import thespeace.springdb.config.MemoryConfig;
+import thespeace.springdb.config.*;
 import thespeace.springdb.repository.ItemRepository;
 
 import javax.sql.DataSource;
@@ -29,7 +26,9 @@ import javax.sql.DataSource;
 //@Import(MemoryConfig.class)
 //@Import(JdbcTemplateV1Config.class)
 //@Import(JdbcTemplateV2Config.class)
-@Import(JdbcTemplateV3Config.class)
+//@Import(JdbcTemplateV2Config.class)
+//@Import(JdbcTemplateV3Config.class)
+@Import(MyBatisConfig.class)
 @SpringBootApplication(scanBasePackages = "thespeace.springdb.web")
 public class SpringDbApplication {
 
