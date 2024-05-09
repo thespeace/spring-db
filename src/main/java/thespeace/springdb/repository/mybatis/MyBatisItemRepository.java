@@ -1,6 +1,7 @@
 package thespeace.springdb.repository.mybatis;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import thespeace.springdb.domain.Item;
 import thespeace.springdb.repository.ItemRepository;
@@ -14,6 +15,7 @@ import java.util.Optional;
  * <h2>ItemRepository 를 구현</h2>
  * MyBatisItemRepository 는 단순히 ItemMapper 에 기능을 위임한다.
  */
+@Slf4j
 @Repository
 @RequiredArgsConstructor
 public class MyBatisItemRepository implements ItemRepository {
@@ -22,6 +24,7 @@ public class MyBatisItemRepository implements ItemRepository {
 
     @Override
     public Item save(Item item) {
+        log.info("itemMapper class={}", itemMapper.getClass());
         itemMapper.save(item);
         return item;
     }
