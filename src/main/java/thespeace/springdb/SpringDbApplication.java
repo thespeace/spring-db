@@ -28,7 +28,8 @@ import javax.sql.DataSource;
 //@Import(JdbcTemplateV2Config.class)
 //@Import(JdbcTemplateV2Config.class)
 //@Import(JdbcTemplateV3Config.class)
-@Import(MyBatisConfig.class)
+//@Import(MyBatisConfig.class)
+@Import(JpaConfig.class)
 @SpringBootApplication(scanBasePackages = "thespeace.springdb.web")
 public class SpringDbApplication {
 
